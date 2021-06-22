@@ -5,6 +5,15 @@
 
 本文是[《从零开始的 JSON 库教程》](https://zhuanlan.zhihu.com/json-tutorial)的第八个单元。代码位于 [json-tutorial/tutorial08](https://github.com/miloyip/json-tutorial/blob/master/tutorial08)。
 
+本单元内容：
+
+1. [对象键值查询](#1-对象键值查询)
+2. [相等比较](#2-相等比较)
+3. [复制、移动与交换](#3-复制移动与交换)
+4. [动态数组](#4-动态数组)
+5. [动态对象](#5-动态对象)
+6. [总结与练习](#6-总结与练习)
+
 ## 1. 对象键值查询
 
 我们在第六个单元实现了 JSON 对象的数据结构，它仅为一个 `lept_value` 的数组：
@@ -173,7 +182,7 @@ void lept_copy(lept_value* dst, const lept_value* src) {
 }
 ~~~
 
-C++11 加入了右值引用的功能，可以从语言层面区分复制和移动语意。而在 C 语言中，我们也可以通过实现不同版本的接口（不同名字的函数），实现这两种语意。但为了令接口更简单和正交（orthgonal），我们修改了 `lept_set_object_value()` 的设计，让它返回新增键值对的值指针，所以我们可以用 `lept_copy()` 去复制赋值，也可以简单地改变新增的键值：
+C++11 加入了右值引用的功能，可以从语言层面区分复制和移动语意。而在 C 语言中，我们也可以通过实现不同版本的接口（不同名字的函数），实现这两种语意。但为了令接口更简单和正交（orthogonal），我们修改了 `lept_set_object_value()` 的设计，让它返回新增键值对的值指针，所以我们可以用 `lept_copy()` 去复制赋值，也可以简单地改变新增的键值：
 
 ~~~c
 /* 返回新增键值对的指针 */
@@ -384,8 +393,8 @@ void lept_remove_object_value(lept_value* v, size_t index);
 本单元练习内容：
 
 1. 完成 `lept_is_equal()` 里的对象比较部分。不需要考虑对象内有重复键的情况。
-2. 打开 `test_array_access()` 里的 `#if 0`，实现 `lept_insert_array_element()`、`lept_erase_array_element()` 和 `lept_clear_array()`。
-3. 打开 `test_object_access()` 里的 `#if 0`，参考动态数组，实现第 5 部分列出的所有函数。
+2. 打开 `test_access_array()` 里的 `#if 0`，实现 `lept_insert_array_element()`、`lept_erase_array_element()` 和 `lept_clear_array()`。
+3. 打开 `test_access_object()` 里的 `#if 0`，参考动态数组，实现第 5 部分列出的所有函数。
 4. 完成 `lept_copy()` 里的数组和对象的复制部分。
 
 如果你遇到问题，有不理解的地方，或是有建议，都欢迎在评论或 [issue](https://github.com/miloyip/json-tutorial/issues) 中提出，让所有人一起讨论。
